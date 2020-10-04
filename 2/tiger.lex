@@ -1,3 +1,6 @@
+(*
+ * (c) 1998 by Andrew W Appel
+ *)
 type pos = int
 type lexresult = Tokens.token
 

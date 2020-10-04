@@ -1,3 +1,6 @@
+(*
+ * (c) 1998 by Andrew W Appel
+ *)
 structure Tokens : Tiger_TOKENS =
 struct
   (* A "scaffold" structure for debugging lexers. *)

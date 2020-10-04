@@ -1,3 +1,6 @@
+(*
+ * (c) 1998 by Andrew W Appel
+ *)
 Group is
   driver.sml
   errormsg.sml

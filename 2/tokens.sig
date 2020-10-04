@@ -1,3 +1,6 @@
+(*
+ * (c) 1998 by Andrew W Appel
+ *)
 signature Tiger_TOKENS =
 sig
 type linenum (* = int *)
