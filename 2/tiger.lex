@@ -37,7 +37,7 @@ ws = [\ \t];
 <INITIAL>then      => (Tokens.THEN(yypos, yypos+4));
 <INITIAL>to        => (Tokens.TO(yypos, yypos+2));
 <INITIAL>type      => (Tokens.TYPE(yypos, yypos+4));
-<INITIAL>var  	  => (Tokens.VAR(yypos,yypos+3));
+<INITIAL>var       => (Tokens.VAR(yypos,yypos+3));
 <INITIAL>while     => (Tokens.WHILE(yypos, yypos+5));
 <INITIAL>"["       => (Tokens.LBRACK(yypos, yypos+1));
 <INITIAL>"]"       => (Tokens.RBRACK(yypos, yypos+1));
@@ -63,7 +63,7 @@ ws = [\ \t];
 <INITIAL>"<>"      => (Tokens.NEQ(yypos, yypos+2));
 <INITIAL>":"       => (Tokens.COLON(yypos, yypos+1));
 <INITIAL>";"       => (Tokens.SEMICOLON(yypos, yypos+1));
-<INITIAL>","	     => (Tokens.COMMA(yypos,yypos+1));
+<INITIAL>","       => (Tokens.COMMA(yypos,yypos+1));
 
 
 <INITIAL>[A-Za-z]+ => (Tokens.ID((yytext), yypos, String.size yytext));
@@ -74,9 +74,9 @@ ws = [\ \t];
 <INITIAL>\".*\"    => (Tokens.STRING((yytext), yypos, String.size yytext));
 
 <INITIAL>{ws}+     => (lex());
-<INITIAL>\n	     => (lineNum := !lineNum+1; linePos := yypos :: !linePos; continue());
+<INITIAL>\n        => (lineNum := !lineNum+1; linePos := yypos :: !linePos; continue());
 
-<COMMENT>\n	     => (lineNum := !lineNum+1; linePos := yypos :: !linePos; continue());
+<COMMENT>\n        => (lineNum := !lineNum+1; linePos := yypos :: !linePos; continue());
 <COMMENT>"\*/" => (YYBEGIN INITIAL; continue ());
 <COMMENT>. => (lex());
 
