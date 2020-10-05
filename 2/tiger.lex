@@ -9,6 +9,7 @@
  *   supposed to work
  * - Use of 'INITIAL' as the main state is a bit confusing
  * - The line numbers might be a little off
+ * - Nested comments won't work
  *)
 type pos = int
 type lexresult = Tokens.token
@@ -70,14 +71,17 @@ ws = [\ \t];
 <INITIAL>[0-9]+    => (
                         (* TODO: is there a better way to get the int? *)
                         Tokens.INT(valOf (Int.fromString yytext),yypos,String.size yytext)
-                    );
+                      );
 <INITIAL>\".*\"    => (Tokens.STRING((yytext), yypos, String.size yytext));
 
 <INITIAL>{ws}+     => (lex());
 <INITIAL>\n        => (lineNum := !lineNum+1; linePos := yypos :: !linePos; continue());
 
 <COMMENT>\n        => (lineNum := !lineNum+1; linePos := yypos :: !linePos; continue());
-<COMMENT>"\*/" => (YYBEGIN INITIAL; continue ());
-<COMMENT>. => (lex());
+<COMMENT>"\*/"     => (YYBEGIN INITIAL; continue ());
+<COMMENT>.         => (lex());
 
-.    => (ErrorMsg.error yypos ("illegal character " ^ yytext); continue());
+.                  => (
+                        (* Everything else has failed :( *)
+                        ErrorMsg.error yypos ("illegal character " ^ yytext); continue())
+                      );
